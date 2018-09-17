@@ -1,0 +1,58 @@
+PODS:
+  - Alamofire (4.7.3)
+  - Lyt (0.6)
+  - MJSwiftCore (0.7.3):
+    - MJSwiftCore/Common (= 0.7.3)
+    - MJSwiftCore/Future (= 0.7.3)
+    - MJSwiftCore/Security (= 0.7.3)
+  - MJSwiftCore/Alamofire (0.7.3):
+    - Alamofire (~> 4.7.2)
+    - MJSwiftCore/Common
+  - MJSwiftCore/Common (0.7.3):
+    - MJSwiftCore/Future
+  - MJSwiftCore/Future (0.7.3)
+  - MJSwiftCore/iOS (0.7.3):
+    - MJSwiftCore/Common
+  - MJSwiftCore/Realm (0.7.3):
+    - MJSwiftCore/Common
+    - MJSwiftCore/Security
+    - RealmSwift (~> 3.3.2)
+  - MJSwiftCore/Security (0.7.3):
+    - MJSwiftCore/Common
+  - MJSwiftCore/Vastra (0.7.3)
+  - Realm (3.3.2):
+    - Realm/Headers (= 3.3.2)
+  - Realm/Headers (3.3.2)
+  - RealmSwift (3.3.2):
+    - Realm (= 3.3.2)
+  - Swinject (2.4.1)
+
+DEPENDENCIES:
+  - Lyt
+  - MJSwiftCore
+  - MJSwiftCore/Alamofire
+  - MJSwiftCore/iOS
+  - MJSwiftCore/Realm
+  - MJSwiftCore/Vastra
+  - Swinject (~> 2.4.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Lyt
+    - MJSwiftCore
+    - Realm
+    - RealmSwift
+    - Swinject
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Lyt: 782ddb228608b0193a2793edaeb3acbb0afa52b1
+  MJSwiftCore: a627f22a1860535bab4b962da05f7375906677d9
+  Realm: d927fbf66df5532cfafc08afb5f7e53ded37b894
+  RealmSwift: 4e903a494e05d866581d69ad6f7e7b879d446baf
+  Swinject: f7f15a9672e99328c1f07f277091087917215700
+
+PODFILE CHECKSUM: cea9a6356d0bb57843d7ceac6a50ec6c45a1eff2
+
+COCOAPODS: 1.5.3
