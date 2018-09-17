@@ -21,6 +21,8 @@
 		D2958B38214FAFEC002E9C6A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2958B37214FAFEC002E9C6A /* ListViewController.swift */; };
 		D2A3ED38214FB206003E2471 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A3ED37214FB206003E2471 /* Item.swift */; };
 		D2A3ED3B214FB9A1003E2471 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A3ED3A214FB9A1003E2471 /* ItemCell.swift */; };
+		D2A3ED3E214FCD59003E2471 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A3ED3D214FCD59003E2471 /* DetailViewController.swift */; };
+		D2A3ED41214FCEC6003E2471 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A3ED40214FCEC6003E2471 /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		D2958B37214FAFEC002E9C6A /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		D2A3ED37214FB206003E2471 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		D2A3ED3A214FB9A1003E2471 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		D2A3ED3D214FCD59003E2471 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		D2A3ED40214FCEC6003E2471 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		E24DC5A0992E84F328586658 /* Pods_Workshop_2018.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workshop_2018.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBBAF3DE5FBC4C838FBB5242 /* Pods-Workshop 2018.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workshop 2018.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workshop 2018/Pods-Workshop 2018.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				D2958B02214FACEE002E9C6A /* AppDelegate.swift */,
+				D2A3ED3F214FCEBA003E2471 /* Network */,
 				D2A3ED36214FB1CD003E2471 /* Model */,
 				D2958B30214FAE9E002E9C6A /* Screens */,
 				D2958B06214FACEE002E9C6A /* Main.storyboard */,
@@ -179,6 +184,7 @@
 			children = (
 				D2958B31214FAEA8002E9C6A /* Splash */,
 				D2958B36214FAF70002E9C6A /* List */,
+				D2A3ED3C214FCD41003E2471 /* Detail */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -207,6 +213,22 @@
 				D2A3ED37214FB206003E2471 /* Item.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D2A3ED3C214FCD41003E2471 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				D2A3ED3D214FCD59003E2471 /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		D2A3ED3F214FCEBA003E2471 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D2A3ED40214FCEC6003E2471 /* Network.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,7 +455,9 @@
 				D2A3ED38214FB206003E2471 /* Item.swift in Sources */,
 				D2958B34214FAEBD002E9C6A /* SplashViewController.swift in Sources */,
 				D2958B03214FACEE002E9C6A /* AppDelegate.swift in Sources */,
+				D2A3ED3E214FCD59003E2471 /* DetailViewController.swift in Sources */,
 				D2958B38214FAFEC002E9C6A /* ListViewController.swift in Sources */,
+				D2A3ED41214FCEC6003E2471 /* Network.swift in Sources */,
 				D2A3ED3B214FB9A1003E2471 /* ItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

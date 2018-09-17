@@ -8,29 +8,10 @@
 
 import UIKit
 
-import Alamofire
 import MJSwiftCore
 import Lyt
 
 class ListViewController: UITableViewController {
-    
-    // HTTP client used to fetch data
-    // Probably, this instance would be shared via some singleton, manager or dependency injection framework.
-    private let sessionManager : SessionManager = {
-        
-        // The HTTP client.
-        let sessionManager = SessionManager()
-        
-        // Let's use a custom MJSwiftCore Request Adapter to inject the base URL of the API
-        // Additionally, we use a custom MJSwiftCore MultiRequestAdapter that allows the usage of multiple reqeust adapters if needed
-        sessionManager.adapter = MultiRequestAdapter([BaseURLRequestAdapter(URL(string:"https://hacker-news.firebaseio.com/v0")!) /*, Add other adapters here */])
-        
-        // If we were using OAuth, there would be a custom OAuthRequestRetrier to retry if tokens were not ok.
-        // However, if multiple request retriers were needed, we could use the MJSwiftCore MultiRequestRetrier class.
-        sessionManager.retrier = MultiRequestRetrier([/* Add RequestRetrier here */])
-        
-        return sessionManager
-    }()
     
     // List of items. This is the data that the tableView shows.
     private var items : Array<Item> = []
@@ -53,6 +34,13 @@ class ListViewController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "item.detail" {
+            let detailVC = segue.destination as! DetailViewController
+            detailVC.item = sender as! Item
+        }
+    }
+    
     // MARK: - UI Management
     
     // Using @objc as this method is referenced inside a #selector call
@@ -63,30 +51,15 @@ class ListViewController: UITableViewController {
     }
     
     // MARK: - Data loading
-    
-    func reloadData(_ completion: @escaping () -> Void = {}) {
-        listOfItems(success: { items in
-            self.items = items
-            self.tableView.reloadData()
-            completion()
-        }, failure: { error in
-            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            completion()
-        })
-    }
 
-    // This method returns a list of items fetched in a bakground thread.
-    // Return closures are called in the main thread.
-    func listOfItems(success: @escaping (Array<Item>) -> Void, failure: @escaping (Error) -> Void) {
+    func reloadData(_ completion: @escaping () -> Void = {}) {
         DispatchQueue.global(qos: .background).async {
-            self.latestItemsIds(success: { itemIds in
+            Network.askstoriesItemsIds(success: { itemIds in
                 let group = DispatchGroup()
                 var array : Array<Item> = []
                 for id in itemIds {
                     group.enter()
-                    self.itemById(id, success: { item in
+                    Network.itemById(id, success: { item in
                         array.append(item)
                         group.leave()
                     }, failure: { error in
@@ -95,61 +68,21 @@ class ListViewController: UITableViewController {
                     })
                 }
                 group.notify(queue: DispatchQueue.main) {
-                    success(array)
+                    self.items = array
+                    self.tableView.reloadData()
+                    completion()
                 }
             }, failure: { error in
                 DispatchQueue.main.async {
-                    failure(error)
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    completion()
                 }
             })
         }
     }
     
-    // This method fetches the list of item ids.
-    // No threading management is done.
-    func latestItemsIds(success: @escaping (Array<Int>) -> Void, failure: @escaping (Error) -> Void) {
-        let path = "askstories.json"
-        sessionManager.request(path).validate().responseJSON(completionHandler: { response in
-            switch response.result {
-            case .failure(let error):
-                failure(error)
-            case .success(let data):
-                if let data = data as? Array<Int> {
-                    success(data)
-                } else {
-                    // Returning custom MJSwiftCore CoreError
-                    failure(CoreError.NotValid("List of item ids is not correctly formatted"));
-                }
-            }
-        })
-    }
-    
-    // This method fetches an item from its Id
-    // No threading management is done.
-    func itemById(_ id: Int, success: @escaping (Item) -> Void, failure: @escaping (Error) -> Void) {
-        let path = "item/\(id).json"
-        sessionManager.request(path).validate().responseJSON(completionHandler: { response in
-            switch response.result {
-            case .failure(let error):
-                failure(error)
-            case .success(let data):
-                
-                if let json = data as? [String : AnyObject] {
-                    do {
-                        let item = try json.decodeAs(Item.self) // <- custom MJSwiftCore method to easily decode from JSON and cast to a type
-                        success(item)
-                    } catch {
-                        // Returning custom MJSwiftCore CoreError
-                        failure(CoreError.NotValid("Item is not correctly formatted"));
-                    }
-                } else {
-                    // Returning custom MJSwiftCore CoreError
-                    failure(CoreError.NotValid("Item is not correctly formatted"));
-                }
-            }
-        })
-    }
-
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -167,7 +100,15 @@ class ListViewController: UITableViewController {
         
         cell.titleLabel.text = item.title
         cell.byLabel.text = "by @\(item.by)"
+        cell.contentLabel.text = item.text
 
         return cell
+    }
+    
+    // MARK: - Table view delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = items[indexPath.row]
+        performSegue(withIdentifier: "item.detail", sender: item)
     }
 }

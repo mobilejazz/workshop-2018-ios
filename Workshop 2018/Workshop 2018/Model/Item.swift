@@ -10,6 +10,14 @@ import Foundation
 
 struct Item : Codable {
     
+    enum ItemType : String, Codable {
+        case job
+        case story
+        case comment
+        case poll
+        case pollopt
+    }
+    
     /*
      {
      "by" : "dhouston",
@@ -26,8 +34,10 @@ struct Item : Codable {
     
     let id : Int
     let by : String
-    let title : String
-    let type : String
+    let title : String?
+    let text : String
+    let type : ItemType
     let time : Int
     let url : URL?
+    let kids : Array<Int>
 }

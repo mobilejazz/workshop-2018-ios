@@ -16,17 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let splash = SplashViewController()
-        let container = ContainerViewController(splash)
+        let splash = SplashViewController() // <- The splash VC
+        let container = ContainerViewController(splash) // <- Custom MJSwiftCore/iOS VC to nest another VC and change it with animations
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = container
         window?.makeKeyAndVisible()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+            // Simulating a loading phase of 2 seconds, and then showing the initialVC of the Main storyboard with animations
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainVC = storyboard.instantiateInitialViewController()!
-            container.set(mainVC, animation: .crossDisolve)
+            container.set(mainVC, animation: .crossDisolve) // <- Using the crossDisolve animation of ContainerViewController
         }
         
         return true
