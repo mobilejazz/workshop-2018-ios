@@ -30,14 +30,14 @@ class ListViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         if items.count == 0 {
-            indicatorView.startAnimating()
             listOfItems(success: { items in
-                self.indicatorView.stopAnimating()
                 self.items = items
                 self.tableView.reloadData()
             }, failure: { error in
-                self.indicatorView.stopAnimating()
-                print("error: \(error)")
+            
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             })
         }
     }
