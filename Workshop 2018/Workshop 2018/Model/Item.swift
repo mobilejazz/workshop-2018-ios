@@ -10,14 +10,6 @@ import Foundation
 
 struct Item : Codable {
     
-    enum ItemType : String, Codable {
-        case job
-        case story
-        case comment
-        case poll
-        case pollopt
-    }
-    
     /*
      {
      "by" : "dhouston",
@@ -32,12 +24,29 @@ struct Item : Codable {
      }
     */
     
+    enum ItemType : String, Codable {
+        case job
+        case story
+        case comment
+        case poll
+        case pollopt
+    }
+    
     let id : Int
     let by : String
     let title : String?
-    let text : String
+    let text : String?
     let type : ItemType
     let time : Int
     let url : URL?
     let kids : Array<Int>
+    
+    func attributtedText() -> NSAttributedString? {
+        guard let text = self.text else { return nil }
+        guard let data = text.data(using: String.Encoding.utf16, allowLossyConversion: false) else { return nil }
+        guard let html = try? NSMutableAttributedString(data: data,
+                                                        options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html],
+                                                        documentAttributes: nil) else { return nil }
+        return html
+    }
 }

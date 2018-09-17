@@ -88,12 +88,12 @@ class DetailViewController: UITableViewController {
         case 0:
             cell.titleLabel.text = item.title
             cell.byLabel.text = "by @\(item.by)"
-            cell.contentLabel.text = item.text
+            cell.contentLabel.attributedText = item.attributtedText()
         case 1:
             let kid = kids[indexPath.row]
             cell.titleLabel.text = kid.title
             cell.byLabel.text = "by @\(kid.by)"
-            cell.contentLabel.text = kid.text
+            cell.contentLabel.attributedText = kid.attributtedText()
         default:
             break
         }

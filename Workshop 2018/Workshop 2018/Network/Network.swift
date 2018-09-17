@@ -61,7 +61,7 @@ struct Network {
                 
                 if let json = data as? [String : AnyObject] {
                     do {
-                        let item = try json.decodeAs(Item.self) // <- custom MJSwiftCore method to easily decode from JSON and cast to a type
+                        let item = try json.decodeAs(Item.self) // <- custom MJSwiftCore method to easily decode from JSON and cast it to a type
                         success(item)
                     } catch {
                         // Returning custom MJSwiftCore CoreError

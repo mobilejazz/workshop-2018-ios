@@ -16,6 +16,8 @@ class ListViewController: UITableViewController {
     // List of items. This is the data that the tableView shows.
     private var items : Array<Item> = []
     
+    private var loadingItems : Bool = true
+    
     // MARK: - VC lifecycle
     
     override func viewDidLoad() {
@@ -30,7 +32,10 @@ class ListViewController: UITableViewController {
         
         if items.count == 0 {
             // Only reload if no items were loaded before.
-            reloadData()
+            reloadData() {
+                self.loadingItems = false
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -69,7 +74,6 @@ class ListViewController: UITableViewController {
                 }
                 group.notify(queue: DispatchQueue.main) {
                     self.items = array
-                    self.tableView.reloadData()
                     completion()
                 }
             }, failure: { error in
@@ -86,21 +90,29 @@ class ListViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if loadingItems {
+            return 1
+        } else {
+            return items.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        if loadingItems {
+            return 0
+        } else {
+            return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(ItemCell.self, for: indexPath) // <- custom MJSwiftCore method to dequeue a cell and cast it. Cell identifier must be the same as the class name by default.
         
-        let item = items[indexPath.row]
+        let item = items[indexPath.section]
         
         cell.titleLabel.text = item.title
         cell.byLabel.text = "by @\(item.by)"
-        cell.contentLabel.text = item.text
+        cell.contentLabel.attributedText = item.attributtedText()
 
         return cell
     }
@@ -108,7 +120,20 @@ class ListViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = items[indexPath.row]
+        let item = items[indexPath.section]
         performSegue(withIdentifier: "item.detail", sender: item)
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            if loadingItems {
+                return "Loading ..."
+            } else {
+                return nil
+            }
+        default:
+            return nil
+        }
     }
 }
