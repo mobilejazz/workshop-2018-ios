@@ -110,7 +110,7 @@ class ListViewController: UITableViewController {
         let item = items[indexPath.section]
         
         cell.titleLabel.text = item.title
-        cell.byLabel.text = "by @\(item.by)"
+        cell.byLabel.text = "by @\(item.by ?? "unknown")"
         cell.contentLabel.attributedText = item.attributtedText()
 
         return cell

@@ -32,12 +32,12 @@ struct Item : Codable {
         case pollopt
     }
     
-    let id : Int
-    let by : String
+    let id : Int?
+    let by : String?
     let title : String?
     let text : String?
-    let type : ItemType
-    let time : Int
+    let type : ItemType?
+    let time : Int?
     let url : URL?
     let kids : Array<Int>?
     

@@ -91,12 +91,12 @@ class DetailViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             cell.titleLabel.text = item.title
-            cell.byLabel.text = "by @\(item.by)"
+            cell.byLabel.text = "by @\(item.by ?? "unknown")"
             cell.contentLabel.attributedText = item.attributtedText()
         case 1:
             let kid = kids[indexPath.row]
             cell.titleLabel.text = kid.title
-            cell.byLabel.text = "by @\(kid.by)"
+            cell.byLabel.text = "by @\(kid.by ?? "unknown")"
             cell.contentLabel.attributedText = kid.attributtedText()
         default:
             break
@@ -109,7 +109,11 @@ class DetailViewController: UITableViewController {
         switch section {
         case 1:
             if loadingKids {
-                return "Loading \(item.kids?.count) comments..."
+                if let count = item.kids?.count {
+                    return "Loading \(count) comments..."
+                } else {
+                    return "Loading comments..."
+                }
             } else {
                 if kids.count == 0 {
                     return "No comments"
