@@ -9,7 +9,6 @@
 import UIKit
 
 import MJSwiftCore
-import Lyt
 
 class ListViewController: UITableViewController {
     
@@ -42,7 +41,7 @@ class ListViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "item.detail" {
             let detailVC = segue.destination as! DetailViewController
-            detailVC.item = sender as! Item
+            detailVC.item = sender as? Item
         }
     }
     
