@@ -1,24 +1,24 @@
 PODS:
   - Alamofire (4.7.3)
-  - MJSwiftCore (0.7.4):
-    - MJSwiftCore/Common (= 0.7.4)
-    - MJSwiftCore/Future (= 0.7.4)
-    - MJSwiftCore/Security (= 0.7.4)
-  - MJSwiftCore/Alamofire (0.7.4):
+  - MJSwiftCore (0.8.0):
+    - MJSwiftCore/Common (= 0.8.0)
+    - MJSwiftCore/Future (= 0.8.0)
+    - MJSwiftCore/Security (= 0.8.0)
+  - MJSwiftCore/Alamofire (0.8.0):
     - Alamofire (~> 4.7.2)
     - MJSwiftCore/Common
-  - MJSwiftCore/Common (0.7.4):
+  - MJSwiftCore/Common (0.8.0):
     - MJSwiftCore/Future
-  - MJSwiftCore/Future (0.7.4)
-  - MJSwiftCore/iOS (0.7.4):
+  - MJSwiftCore/Future (0.8.0)
+  - MJSwiftCore/iOS (0.8.0):
     - MJSwiftCore/Common
-  - MJSwiftCore/Realm (0.7.4):
+  - MJSwiftCore/Realm (0.8.0):
     - MJSwiftCore/Common
     - MJSwiftCore/Security
     - RealmSwift (~> 3.9.0)
-  - MJSwiftCore/Security (0.7.4):
+  - MJSwiftCore/Security (0.8.0):
     - MJSwiftCore/Common
-  - MJSwiftCore/Vastra (0.7.4)
+  - MJSwiftCore/Vastra (0.8.0)
   - Realm (3.9.0):
     - Realm/Headers (= 3.9.0)
   - Realm/Headers (3.9.0)
@@ -44,7 +44,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  MJSwiftCore: 4ba1a3cc83270d2df39cd2011f4020c298ef3725
+  MJSwiftCore: 6ea74d206c88e928bf5915e88a5af618c303b811
   Realm: 3d36f208bf3aff8335dc3298742140182bde4edb
   RealmSwift: aa4d11917bfcfaa3ed51f219102a487ecd895447
   Swinject: f7f15a9672e99328c1f07f277091087917215700
