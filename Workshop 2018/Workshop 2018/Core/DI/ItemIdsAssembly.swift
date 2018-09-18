@@ -14,8 +14,16 @@ import MJSwiftCore
 class ItemIdsAssembly: Assembly {
     
     func assemble(container: Container) {
+        
+        // Network
         let itemIdsNetworkDataSource = ItemIdsNetworkDataSource(container.resolve(SessionManager.self)!)
-        let repository = SingleGetDataSourceRepository(itemIdsNetworkDataSource)
+        let networkDataSource = DataSourceAssambler(get: itemIdsNetworkDataSource, put: VoidPutDataSource(), delete: VoidDeleteDataSource())
+        
+        // Storage
+        let userDefaultsDataSource = UserDefaultsDataSource<Int>(UserDefaults.standard, prefix: "itemIds")
+
+        // Repository
+        let repository = NetworkStorageRepository(network: networkDataSource, storage: userDefaultsDataSource)
         
         // Registering the interactor
         container.register(Interactor.GetAll<Int>.self, name: "askstories") { _ in Interactor.GetAll(defaultExecutor, repository, AskStoriesQuery()) }

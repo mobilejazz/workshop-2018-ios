@@ -45,7 +45,11 @@ extension ItemNetworkDataSource {
             guard let json = data as? [String:AnyObject] else { throw CoreError.NotValid("Invalid data format") }
             
             // Finally, decode the json data
-            return try json.decodeAs(ItemEntity.self)
+            var item = try json.decodeAs(ItemEntity.self)
+            
+            // Store last update
+            item.lastUpdate = Date()
+            return item
         }
     }
 }

@@ -59,7 +59,7 @@ class ListViewController: UITableViewController {
     // MARK: - Data loading
 
     func reloadData(_ completion: @escaping () -> Void = {}) {
-        getAskstoriesIds.execute().flatMap { ids in
+        getAskstoriesIds.execute(StorageSyncOperation()).flatMap { ids in
             return self.getItemsById.execute(with: ids)
             }.then { items in
                 self.items = items

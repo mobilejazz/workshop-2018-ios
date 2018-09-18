@@ -15,8 +15,17 @@ class ItemAssembly: Assembly {
     
     func assemble(container: Container) {
         
+        // Network
         let itemNetworkDataSource = ItemNetworkDataSource(container.resolve(SessionManager.self)!)
-        let repository = SingleGetDataSourceRepository(itemNetworkDataSource)
+        let networkDataSource = DataSourceAssambler(get: itemNetworkDataSource, put: VoidPutDataSource(), delete: VoidDeleteDataSource())
+        
+        // Storage
+        let userDefaultsDataSource = UserDefaultsDataSource<Data>(UserDefaults.standard, prefix: "item")
+        let itemToDataMappedDataSource = DataSourceMapper(dataSource: userDefaultsDataSource, toToMapper: EncodableToDataMapper<ItemEntity>(), toFromMapper: DataToDecodableMapper<ItemEntity>())
+        let validatedDataSource = DataSourceValidator(dataSource: itemToDataMappedDataSource, validator: VastraService([VastraTimestampStrategy()]))
+        
+        // Repository
+        let repository = NetworkStorageRepository(network: networkDataSource, storage: validatedDataSource)
         let mappedRepository = GetRepositoryMapper(repository: repository, toFromMapper: ItemEntityToItemMapper())
         
 

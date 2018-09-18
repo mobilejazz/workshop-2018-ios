@@ -9,7 +9,7 @@
 import Foundation
 import MJSwiftCore
 
-struct ItemEntity : Codable {
+struct ItemEntity : Codable, VastraTimestampStrategyDataSource {
     
     enum ItemType : String, Codable {
         case job
@@ -27,6 +27,14 @@ struct ItemEntity : Codable {
     let time : Int?
     let url : URL?
     let kids : [Int]?
+    
+    // MARK: VastraTimestampStrategyDataSource
+    
+    var lastUpdate: Date? = nil
+    
+    func expiryTimeInterval() -> Time {
+        return .minutes(5)
+    }
 }
 
 class ItemEntityToItemMapper : Mapper<ItemEntity,Item> {

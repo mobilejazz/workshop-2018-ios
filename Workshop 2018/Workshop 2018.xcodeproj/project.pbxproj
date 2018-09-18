@@ -30,6 +30,7 @@
 		D2F7341C2150ED47002F24ED /* NetworkAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F7341B2150ED47002F24ED /* NetworkAssembly.swift */; };
 		D2F7341F2150F02D002F24ED /* GetItemsById.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F7341E2150F02D002F24ED /* GetItemsById.swift */; };
 		D2F734252150F744002F24ED /* ItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F734242150F744002F24ED /* ItemEntity.swift */; };
+		D2F84AC921512BF100DC67AF /* StorageAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F84AC821512BF100DC67AF /* StorageAssembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		D2F7341B2150ED47002F24ED /* NetworkAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAssembly.swift; sourceTree = "<group>"; };
 		D2F7341E2150F02D002F24ED /* GetItemsById.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetItemsById.swift; sourceTree = "<group>"; };
 		D2F734242150F744002F24ED /* ItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemEntity.swift; sourceTree = "<group>"; };
+		D2F84AC821512BF100DC67AF /* StorageAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageAssembly.swift; sourceTree = "<group>"; };
 		E24DC5A0992E84F328586658 /* Pods_Workshop_2018.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workshop_2018.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBBAF3DE5FBC4C838FBB5242 /* Pods-Workshop 2018.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workshop 2018.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workshop 2018/Pods-Workshop 2018.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -270,6 +272,7 @@
 			children = (
 				D2F734192150ED09002F24ED /* AppAssembler.swift */,
 				D2F7341B2150ED47002F24ED /* NetworkAssembly.swift */,
+				D2F84AC821512BF100DC67AF /* StorageAssembly.swift */,
 				D2F734152150ECD7002F24ED /* ItemAssembly.swift */,
 				D2F734172150ECE2002F24ED /* ItemIdsAssembly.swift */,
 			);
@@ -525,6 +528,7 @@
 				D2A3ED3B214FB9A1003E2471 /* ItemCell.swift in Sources */,
 				D2F734252150F744002F24ED /* ItemEntity.swift in Sources */,
 				D2F734122150EBF2002F24ED /* ItemIdsNetworkDataSource.swift in Sources */,
+				D2F84AC921512BF100DC67AF /* StorageAssembly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
