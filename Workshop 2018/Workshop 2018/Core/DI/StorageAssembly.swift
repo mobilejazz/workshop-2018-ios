@@ -12,7 +12,6 @@ import Alamofire
 import MJSwiftCore
 
 class StorageAssembly: Assembly {
-    
     func assemble(container: Container) {
         
     }
