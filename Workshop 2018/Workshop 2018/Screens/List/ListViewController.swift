@@ -51,15 +51,15 @@ class ListViewController: UITableViewController {
     
     // Using @objc as this method is referenced inside a #selector call
     @objc func pullToRefresh(sender: UIRefreshControl) {
-        reloadData() {
+        reloadData(refresh: true) {
             sender.endRefreshing()
         }
     }
     
     // MARK: - Data loading
 
-    func reloadData(_ completion: @escaping () -> Void = {}) {
-        getAskstoriesIds.execute(StorageSyncOperation()).flatMap { ids in
+    func reloadData(refresh: Bool = false, completion: @escaping () -> Void = {}) {
+        getAskstoriesIds.execute(refresh ? NetworkSyncOperation() : StorageSyncOperation()).flatMap { ids in
             return self.getItemsById.execute(with: ids)
             }.then { items in
                 self.items = items
