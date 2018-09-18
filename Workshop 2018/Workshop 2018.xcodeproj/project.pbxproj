@@ -22,7 +22,14 @@
 		D2A3ED38214FB206003E2471 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A3ED37214FB206003E2471 /* Item.swift */; };
 		D2A3ED3B214FB9A1003E2471 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A3ED3A214FB9A1003E2471 /* ItemCell.swift */; };
 		D2A3ED3E214FCD59003E2471 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A3ED3D214FCD59003E2471 /* DetailViewController.swift */; };
-		D2A3ED41214FCEC6003E2471 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A3ED40214FCEC6003E2471 /* Network.swift */; };
+		D2F734102150E833002F24ED /* ItemNetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F7340F2150E833002F24ED /* ItemNetworkDataSource.swift */; };
+		D2F734122150EBF2002F24ED /* ItemIdsNetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F734112150EBF2002F24ED /* ItemIdsNetworkDataSource.swift */; };
+		D2F734162150ECD7002F24ED /* ItemAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F734152150ECD7002F24ED /* ItemAssembly.swift */; };
+		D2F734182150ECE2002F24ED /* ItemIdsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F734172150ECE2002F24ED /* ItemIdsAssembly.swift */; };
+		D2F7341A2150ED09002F24ED /* AppAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F734192150ED09002F24ED /* AppAssembler.swift */; };
+		D2F7341C2150ED47002F24ED /* NetworkAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F7341B2150ED47002F24ED /* NetworkAssembly.swift */; };
+		D2F7341F2150F02D002F24ED /* GetItemsById.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F7341E2150F02D002F24ED /* GetItemsById.swift */; };
+		D2F734252150F744002F24ED /* ItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F734242150F744002F24ED /* ItemEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +75,14 @@
 		D2A3ED37214FB206003E2471 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		D2A3ED3A214FB9A1003E2471 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		D2A3ED3D214FCD59003E2471 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		D2A3ED40214FCEC6003E2471 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		D2F7340F2150E833002F24ED /* ItemNetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNetworkDataSource.swift; sourceTree = "<group>"; };
+		D2F734112150EBF2002F24ED /* ItemIdsNetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemIdsNetworkDataSource.swift; sourceTree = "<group>"; };
+		D2F734152150ECD7002F24ED /* ItemAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAssembly.swift; sourceTree = "<group>"; };
+		D2F734172150ECE2002F24ED /* ItemIdsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemIdsAssembly.swift; sourceTree = "<group>"; };
+		D2F734192150ED09002F24ED /* AppAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
+		D2F7341B2150ED47002F24ED /* NetworkAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAssembly.swift; sourceTree = "<group>"; };
+		D2F7341E2150F02D002F24ED /* GetItemsById.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetItemsById.swift; sourceTree = "<group>"; };
+		D2F734242150F744002F24ED /* ItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemEntity.swift; sourceTree = "<group>"; };
 		E24DC5A0992E84F328586658 /* Pods_Workshop_2018.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workshop_2018.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBBAF3DE5FBC4C838FBB5242 /* Pods-Workshop 2018.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workshop 2018.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workshop 2018/Pods-Workshop 2018.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				D2958B02214FACEE002E9C6A /* AppDelegate.swift */,
-				D2A3ED3F214FCEBA003E2471 /* Network */,
+				D2F7340D2150E809002F24ED /* Core */,
 				D2A3ED36214FB1CD003E2471 /* Model */,
 				D2958B30214FAE9E002E9C6A /* Screens */,
 				D2958B06214FACEE002E9C6A /* Main.storyboard */,
@@ -223,12 +237,59 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		D2A3ED3F214FCEBA003E2471 /* Network */ = {
+		D2F7340D2150E809002F24ED /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				D2A3ED40214FCEC6003E2471 /* Network.swift */,
+				D2F734142150ECC7002F24ED /* DI */,
+				D2F7341D2150F00E002F24ED /* Interactor */,
+				D2F734232150F735002F24ED /* Entities */,
+				D2F7340E2150E81A002F24ED /* DataSource */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		D2F7340E2150E81A002F24ED /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				D2F734132150ECBE002F24ED /* Network */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		D2F734132150ECBE002F24ED /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D2F7340F2150E833002F24ED /* ItemNetworkDataSource.swift */,
+				D2F734112150EBF2002F24ED /* ItemIdsNetworkDataSource.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		D2F734142150ECC7002F24ED /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				D2F734192150ED09002F24ED /* AppAssembler.swift */,
+				D2F7341B2150ED47002F24ED /* NetworkAssembly.swift */,
+				D2F734152150ECD7002F24ED /* ItemAssembly.swift */,
+				D2F734172150ECE2002F24ED /* ItemIdsAssembly.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		D2F7341D2150F00E002F24ED /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				D2F7341E2150F02D002F24ED /* GetItemsById.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D2F734232150F735002F24ED /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				D2F734242150F744002F24ED /* ItemEntity.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,11 +513,18 @@
 			files = (
 				D2A3ED38214FB206003E2471 /* Item.swift in Sources */,
 				D2958B34214FAEBD002E9C6A /* SplashViewController.swift in Sources */,
+				D2F734102150E833002F24ED /* ItemNetworkDataSource.swift in Sources */,
 				D2958B03214FACEE002E9C6A /* AppDelegate.swift in Sources */,
 				D2A3ED3E214FCD59003E2471 /* DetailViewController.swift in Sources */,
+				D2F7341C2150ED47002F24ED /* NetworkAssembly.swift in Sources */,
+				D2F7341F2150F02D002F24ED /* GetItemsById.swift in Sources */,
 				D2958B38214FAFEC002E9C6A /* ListViewController.swift in Sources */,
-				D2A3ED41214FCEC6003E2471 /* Network.swift in Sources */,
+				D2F734162150ECD7002F24ED /* ItemAssembly.swift in Sources */,
+				D2F734182150ECE2002F24ED /* ItemIdsAssembly.swift in Sources */,
+				D2F7341A2150ED09002F24ED /* AppAssembler.swift in Sources */,
 				D2A3ED3B214FB9A1003E2471 /* ItemCell.swift in Sources */,
+				D2F734252150F744002F24ED /* ItemEntity.swift in Sources */,
+				D2F734122150EBF2002F24ED /* ItemIdsNetworkDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

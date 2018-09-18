@@ -14,8 +14,10 @@ class ListViewController: UITableViewController {
     
     // List of items. This is the data that the tableView shows.
     private var items : Array<Item> = []
-    
     private var loadingItems : Bool = true
+    
+    private lazy var getAskstoriesIds = AppAssembler.resolver.resolve(Interactor.GetAll<Int>.self, name: "askstories")!
+    private lazy var getItemsById = AppAssembler.resolver.resolve(Interactor.GetItemsById.self)!
     
     // MARK: - VC lifecycle
     
@@ -57,32 +59,16 @@ class ListViewController: UITableViewController {
     // MARK: - Data loading
 
     func reloadData(_ completion: @escaping () -> Void = {}) {
-        DispatchQueue.global(qos: .background).async {
-            Network.askstoriesItemsIds(success: { itemIds in
-                let group = DispatchGroup()
-                var array : Array<Item> = []
-                for id in itemIds {
-                    group.enter()
-                    Network.itemById(id, success: { item in
-                        array.append(item)
-                        group.leave()
-                    }, failure: { error in
-                        // Nothing to do
-                        group.leave()
-                    })
-                }
-                group.notify(queue: DispatchQueue.main) {
-                    self.items = array
-                    completion()
-                }
-            }, failure: { error in
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    completion()
-                }
-            })
+        getAskstoriesIds.execute().flatMap { ids in
+            return self.getItemsById.execute(with: ids)
+            }.then { items in
+                self.items = items
+                completion()
+            }.fail { error in
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                completion()
         }
     }
     
@@ -110,7 +96,7 @@ class ListViewController: UITableViewController {
         let item = items[indexPath.section]
         
         cell.titleLabel.text = item.title
-        cell.byLabel.text = "by @\(item.by ?? "unknown")"
+        cell.byLabel.text = "by @\(item.by)"
         cell.contentLabel.attributedText = item.attributtedText()
 
         return cell
