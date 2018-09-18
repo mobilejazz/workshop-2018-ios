@@ -109,7 +109,7 @@ class DetailViewController: UITableViewController {
         switch section {
         case 1:
             if loadingKids {
-                return "Loading comments..."
+                return "Loading \(item.kids?.count) comments..."
             } else {
                 if kids.count == 0 {
                     return "No comments"
