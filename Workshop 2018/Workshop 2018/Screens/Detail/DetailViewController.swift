@@ -43,23 +43,27 @@ class DetailViewController: UITableViewController {
     // Mark - Data loading
     
     func reloadData(_ completion: @escaping () -> Void = {}) {
-        DispatchQueue.global(qos: .background).async {
-            let group = DispatchGroup()
-            var array : Array<Item> = []
-            for id in self.item.kids {
-                group.enter()
-                Network.itemById(id, success: { item in
-                    array.append(item)
-                    group.leave()
-                }, failure: { error in
-                    // Nothing to do
-                    group.leave()
-                })
+        if let kids = item.kids {
+            DispatchQueue.global(qos: .background).async {
+                let group = DispatchGroup()
+                var array : Array<Item> = []
+                for id in kids {
+                    group.enter()
+                    Network.itemById(id, success: { item in
+                        array.append(item)
+                        group.leave()
+                    }, failure: { error in
+                        // Nothing to do
+                        group.leave()
+                    })
+                }
+                group.notify(queue: DispatchQueue.main) {
+                    self.kids = array
+                    completion()
+                }
             }
-            group.notify(queue: DispatchQueue.main) {
-                self.kids = array
-                completion()
-            }
+        } else {
+            completion()
         }
     }
 

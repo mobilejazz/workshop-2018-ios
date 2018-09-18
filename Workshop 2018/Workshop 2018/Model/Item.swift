@@ -39,7 +39,7 @@ struct Item : Codable {
     let type : ItemType
     let time : Int
     let url : URL?
-    let kids : Array<Int>
+    let kids : Array<Int>?
     
     func attributtedText() -> NSAttributedString? {
         guard let text = self.text else { return nil }
