@@ -53,6 +53,7 @@ class ListViewController: UITableViewController {
     @objc func pullToRefresh(sender: UIRefreshControl) {
         reloadData(refresh: true) {
             sender.endRefreshing()
+            self.tableView.reloadData()
         }
     }
     
