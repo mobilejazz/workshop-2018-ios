@@ -9,6 +9,7 @@
 import Foundation
 
 struct Item {
+    let id : Int
     let by : String
     let title : String
     let text : String

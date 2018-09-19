@@ -20,6 +20,7 @@ class DetailViewController: UITableViewController {
     private var loadingKids : Bool = true
     private var kids : Array<Item> = []
     
+    private lazy var getItem = AppAssembler.resolver.resolve(Interactor.GetByQuery<Item>.self)!
     private lazy var getItemsById = AppAssembler.resolver.resolve(Interactor.GetItemsById.self)!
 
     override func viewDidLoad() {
@@ -45,14 +46,18 @@ class DetailViewController: UITableViewController {
     // Mark - Data loading
     
     func reloadData(_ completion: @escaping () -> Void = {}) {
-        getItemsById.execute(with: item.kids).then { items in
-            self.kids = items
-            completion()
-            }.fail { error in
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                completion()
+        getItem.execute(item.id).then { item in
+            self.item = item
+            }.onCompletion {
+                self.getItemsById.execute(with: self.item.kids).then { items in
+                    self.kids = items
+                    completion()
+                    }.fail { error in
+                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        completion()
+                }
         }
     }
 

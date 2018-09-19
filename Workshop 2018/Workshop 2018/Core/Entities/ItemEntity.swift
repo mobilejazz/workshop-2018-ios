@@ -19,7 +19,7 @@ struct ItemEntity : Codable {
         case pollopt
     }
     
-    let id : Int?
+    let id : Int
     let by : String?
     let title : String?
     let text : String?
@@ -31,7 +31,8 @@ struct ItemEntity : Codable {
 
 class ItemEntityToItemMapper : Mapper<ItemEntity,Item> {
     override func map(_ from: ItemEntity) throws -> Item {
-        return Item(by: from.by ?? "unknown",
+        return Item(id: from.id,
+                    by: from.by ?? "unknown",
                     title: from.title ?? "",
                     text: from.text ?? "",
                     kids: from.kids ?? [])
