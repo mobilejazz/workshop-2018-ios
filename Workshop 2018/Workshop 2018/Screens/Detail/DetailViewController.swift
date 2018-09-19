@@ -45,8 +45,8 @@ class DetailViewController: UITableViewController {
     
     // Mark - Data loading
     
-    func reloadData(_ completion: @escaping () -> Void = {}) {
-        getItem.execute(item.id).then { item in
+    func reloadData(refresh: Bool = false, _ completion: @escaping () -> Void = {}) {
+        getItem.execute(item.id, refresh ? NetworkSyncOperation() : StorageSyncOperation()).then { item in
             self.item = item
             }.onCompletion {
                 self.getItemsById.execute(with: self.item.kids).then { items in
