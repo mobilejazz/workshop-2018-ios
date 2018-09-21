@@ -46,18 +46,14 @@ class DetailViewController: UITableViewController {
     // Mark - Data loading
     
     func reloadData(_ completion: @escaping () -> Void = {}) {
-        getItem.execute(item.id).then { item in
-            self.item = item
-            }.onCompletion {
-                self.getItemsById.execute(with: self.item.kids).then { items in
-                    self.kids = items
-                    completion()
-                    }.fail { error in
-                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                        completion()
-                }
+        self.getItemsById.execute(with: self.item.kids).then { items in
+            self.kids = items
+            completion()
+            }.fail { error in
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                completion()
         }
     }
 
