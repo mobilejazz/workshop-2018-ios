@@ -19,6 +19,7 @@ PODS:
   - MJSwiftCore/Security (0.8.0):
     - MJSwiftCore/Common
   - MJSwiftCore/Vastra (0.8.0)
+  - ReachabilitySwift (4.2.1)
   - Realm (3.9.0):
     - Realm/Headers (= 3.9.0)
   - Realm/Headers (3.9.0)
@@ -32,12 +33,14 @@ DEPENDENCIES:
   - MJSwiftCore/iOS
   - MJSwiftCore/Realm
   - MJSwiftCore/Vastra
+  - ReachabilitySwift
   - Swinject (~> 2.4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - MJSwiftCore
+    - ReachabilitySwift
     - Realm
     - RealmSwift
     - Swinject
@@ -45,10 +48,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   MJSwiftCore: 6ea74d206c88e928bf5915e88a5af618c303b811
+  ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
   Realm: 3d36f208bf3aff8335dc3298742140182bde4edb
   RealmSwift: aa4d11917bfcfaa3ed51f219102a487ecd895447
   Swinject: f7f15a9672e99328c1f07f277091087917215700
 
-PODFILE CHECKSUM: 3ff43175b753392e5fa7bdd22f518a04da1b99ff
+PODFILE CHECKSUM: c0d5b0611e16784ccfbf0f3999dccb09bbd5e00a
 
 COCOAPODS: 1.6.0.beta.1

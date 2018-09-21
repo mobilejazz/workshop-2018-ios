@@ -45,8 +45,23 @@ class DetailViewController: UITableViewController {
     
     // Mark - Data loading
     
+<<<<<<< HEAD
     func reloadData(refresh: Bool = false, _ completion: @escaping () -> Void = {}) {
-        self.getItemsById.execute(with: self.item.kids, StorageSyncOperation()).then { items in
+        getItem.execute(item.id, refresh ? NetworkSyncOperation() : StorageSyncOperation()).then { item in
+            self.item = item
+            }.onCompletion {
+                self.getItemsById.execute(with: self.item.kids).then { items in
+                    self.kids = items
+                    completion()
+                    }.fail { error in
+                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        completion()
+                }
+=======
+    func reloadData(_ completion: @escaping () -> Void = {}) {
+        self.getItemsById.execute(with: self.item.kids).then { items in
             self.kids = items
             completion()
             }.fail { error in
@@ -54,6 +69,7 @@ class DetailViewController: UITableViewController {
                 alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
                 completion()
+>>>>>>> network
         }
     }
 

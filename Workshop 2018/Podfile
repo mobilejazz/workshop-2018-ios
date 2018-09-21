@@ -6,14 +6,15 @@ target 'Workshop 2018' do
   use_frameworks!
 
   # Pods for Workshop 2018
-  pod 'Swinject', '~> 2.4.0'
+  pod 'Swinject'
+  pod 'ReachabilitySwift'
   
   pod 'MJSwiftCore'
   pod 'MJSwiftCore/Alamofire'
   pod 'MJSwiftCore/Realm'
   pod 'MJSwiftCore/Vastra'
   pod 'MJSwiftCore/iOS'
-  
+ 
   target 'Workshop 2018Tests' do
     inherit! :search_paths
     # Pods for testing

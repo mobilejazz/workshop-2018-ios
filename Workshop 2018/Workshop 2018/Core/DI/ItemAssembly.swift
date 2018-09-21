@@ -10,6 +10,7 @@ import Foundation
 import Swinject
 import Alamofire
 import MJSwiftCore
+import Reachability
 
 class ItemAssembly: Assembly {
     
@@ -22,7 +23,11 @@ class ItemAssembly: Assembly {
         // Storage
         let userDefaultsDataSource = UserDefaultsDataSource<Data>(UserDefaults.standard, prefix: "item")
         let itemToDataMappedDataSource = DataSourceMapper(dataSource: userDefaultsDataSource, toToMapper: EncodableToDataMapper<ItemEntity>(), toFromMapper: DataToDecodableMapper<ItemEntity>())
-        let validatedDataSource = DataSourceValidator(dataSource: itemToDataMappedDataSource, validator: VastraService([VastraTimestampStrategy()]))
+        
+        let vastra = VastraService([VastraReachabilityStrategy(Reachability()!),
+                                    VastraTimestampStrategy()])
+        
+        let validatedDataSource = DataSourceValidator(dataSource: itemToDataMappedDataSource, validator: vastra)
         
         // Repository
         let repository = NetworkStorageRepository(network: networkDataSource, storage: validatedDataSource)
@@ -36,3 +41,12 @@ class ItemAssembly: Assembly {
         container.register(Interactor.GetItemsById.self) { Interactor.GetItemsById(defaultExecutor, getItem: $0.resolve(Interactor.GetByQuery<Item>.self)!) }
     }
 }
+
+extension Reachability : VastraReachability {
+    public func isReachable() -> Bool {
+        return self.connection != .none
+    }
+}
+
+// Make Vastra compliant with ObjectValidation
+extension VastraService : ObjectValidation { }

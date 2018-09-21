@@ -12,7 +12,6 @@ import MJSwiftCore
 
 class AppAssembler {
     static let assembler : Assembler = Assembler([NetworkAssembly(),
-                                                  StorageAssembly(),
                                                   ItemAssembly(),
                                                   ItemIdsAssembly()])
     
