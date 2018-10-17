@@ -364,13 +364,16 @@
 				TargetAttributes = {
 					D2958AFE214FACEE002E9C6A = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					D2958B12214FACEF002E9C6A = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = D2958AFE214FACEE002E9C6A;
 					};
 					D2958B1D214FACEF002E9C6A = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = D2958AFE214FACEE002E9C6A;
 					};
 				};
@@ -709,7 +712,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobilejazz.Workshop-2018";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -728,7 +731,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobilejazz.Workshop-2018";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -749,7 +752,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobilejazz.Workshop-2018Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workshop 2018.app/Workshop 2018";
 			};
@@ -771,7 +774,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobilejazz.Workshop-2018Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workshop 2018.app/Workshop 2018";
 			};
@@ -792,7 +795,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobilejazz.Workshop-2018UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "Workshop 2018";
 			};
@@ -813,7 +816,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobilejazz.Workshop-2018UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "Workshop 2018";
 			};

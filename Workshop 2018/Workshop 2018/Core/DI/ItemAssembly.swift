@@ -15,11 +15,25 @@ class ItemAssembly: Assembly {
     
     func assemble(container: Container) {
         
+        // Network
         let itemNetworkDataSource = ItemNetworkDataSource(container.resolve(SessionManager.self)!)
-        let repository = SingleGetDataSourceRepository(itemNetworkDataSource)
-        let mappedRepository = GetRepositoryMapper(repository: repository, toFromMapper: ItemEntityToItemMapper())
+        
+        let networkDataSoure = DataSourceAssembler(get: itemNetworkDataSource)
+        
+        // Storage
+        
+        let rawStorageDataSource = DeviceStorageDataSource<Data>(UserDefaults.standard, prefix: "item")
+        
+        let storageDataSource = DataSourceMapper(dataSource: rawStorageDataSource, toInMapper: EncodableToDataMapper<ItemEntity>(), toOutMapper: DataToDecodableMapper<ItemEntity>())
+         
+        // Repository
+        
+        let repository = NetworkStorageRepository(network: networkDataSoure, storage: storageDataSource)
+        
+        let mappedRepository = GetRepositoryMapper(repository: repository, toOutMapper: ItemEntityToItemMapper())
         
 
+        
         // Registering default interactors
         container.register(Interactor.GetByQuery<Item>.self) { _ in Interactor.GetByQuery(defaultExecutor, mappedRepository) }
         

@@ -1,24 +1,27 @@
 PODS:
   - Alamofire (4.7.3)
-  - MJSwiftCore (0.8.0):
-    - MJSwiftCore/Common (= 0.8.0)
-    - MJSwiftCore/Future (= 0.8.0)
-    - MJSwiftCore/Security (= 0.8.0)
-  - MJSwiftCore/Alamofire (0.8.0):
-    - Alamofire (~> 4.7.2)
-    - MJSwiftCore/Common
-  - MJSwiftCore/Common (0.8.0):
+  - MJSwiftCore (0.9.0):
+    - MJSwiftCore/Common (= 0.9.0)
+    - MJSwiftCore/Repository (= 0.9.0)
+    - MJSwiftCore/Security (= 0.9.0)
+  - MJSwiftCore/Alamofire (0.9.0):
+    - Alamofire (~> 4.7.3)
     - MJSwiftCore/Future
-  - MJSwiftCore/Future (0.8.0)
-  - MJSwiftCore/iOS (0.8.0):
+  - MJSwiftCore/Common (0.9.0):
+    - MJSwiftCore/Future
+  - MJSwiftCore/Future (0.9.0)
+  - MJSwiftCore/iOS (0.9.0):
     - MJSwiftCore/Common
-  - MJSwiftCore/Realm (0.8.0):
-    - MJSwiftCore/Common
+  - MJSwiftCore/Realm (0.9.0):
+    - MJSwiftCore/Repository
     - MJSwiftCore/Security
     - RealmSwift (~> 3.9.0)
-  - MJSwiftCore/Security (0.8.0):
+  - MJSwiftCore/Repository (0.9.0):
     - MJSwiftCore/Common
-  - MJSwiftCore/Vastra (0.8.0)
+    - MJSwiftCore/Future
+  - MJSwiftCore/Security (0.9.0):
+    - MJSwiftCore/Repository
+  - MJSwiftCore/Vastra (0.9.0)
   - ReachabilitySwift (4.2.1)
   - Realm (3.9.0):
     - Realm/Headers (= 3.9.0)
@@ -34,7 +37,7 @@ DEPENDENCIES:
   - MJSwiftCore/Realm
   - MJSwiftCore/Vastra
   - ReachabilitySwift
-  - Swinject (~> 2.4.0)
+  - Swinject
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -47,12 +50,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  MJSwiftCore: 6ea74d206c88e928bf5915e88a5af618c303b811
+  MJSwiftCore: 94c804314151097c418ace6112c10cc7741808ce
   ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
   Realm: 3d36f208bf3aff8335dc3298742140182bde4edb
   RealmSwift: aa4d11917bfcfaa3ed51f219102a487ecd895447
   Swinject: f7f15a9672e99328c1f07f277091087917215700
 
-PODFILE CHECKSUM: c0d5b0611e16784ccfbf0f3999dccb09bbd5e00a
+PODFILE CHECKSUM: 626adef868394d37faf43cdf4a319113eb9a8ce3
 
 COCOAPODS: 1.6.0.beta.1

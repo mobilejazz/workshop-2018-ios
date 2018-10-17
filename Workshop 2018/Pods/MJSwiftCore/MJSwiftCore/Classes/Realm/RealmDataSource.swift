@@ -17,6 +17,14 @@
 import Foundation
 import RealmSwift
 
+///
+/// Note that id can only be either String or Int.
+///
+public protocol RealmEntity {
+    associatedtype T : Hashable
+    var id : T? { get }
+}
+
 public protocol RealmQuery : Query {
     var realmPredicate : NSPredicate { get }
 }
@@ -27,7 +35,7 @@ extension NSPredicate : RealmQuery {
     }
 }
 
-public class RealmDataSource <E: Entity, O: Object> : DataSource {
+public class RealmDataSource <E: RealmEntity, O: Object> : GetDataSource, PutDataSource, DeleteDataSource {
     
     public typealias T = E
     
@@ -54,7 +62,7 @@ public class RealmDataSource <E: Entity, O: Object> : DataSource {
                 return realm.object(ofType: O.self, forPrimaryKey: query.id)
                 }.map { try self.toEntityMapper.map($0) }
         default:
-            fatalError()
+            query.fatalError(.get, self)
         }
     }
     
@@ -69,7 +77,7 @@ public class RealmDataSource <E: Entity, O: Object> : DataSource {
                 return Array(realm.objects(O.self).filter(query.realmPredicate))
                 }.map { try self.toEntityMapper.map($0) }
         default:
-            fatalError()
+            query.fatalError(.getAll, self)
         }
     }
     
@@ -89,9 +97,9 @@ public class RealmDataSource <E: Entity, O: Object> : DataSource {
             if value != nil {
                 return Future(CoreError.IllegalArgument("Value parameter must be nil when using an ObjectQuery"))
             }
-            return put(query.object, in: VoidQuery())
+            return put(query.value, in: VoidQuery())
         default:
-            fatalError()
+            query.fatalError(.put, self)
         }
     }
     
@@ -106,13 +114,13 @@ public class RealmDataSource <E: Entity, O: Object> : DataSource {
                 }.map { try self.toEntityMapper.map($0) }
         case is AllObjectsQuery:
             return putAll(array, in: VoidQuery())
-        case let query as ArrayQuery<E>:
+        case let query as ObjectsQuery<E>:
             if array.count > 0 {
                 return Future(CoreError.IllegalArgument("Parameter array must be empty when using an ArrayQuery"))
             }
-            return putAll(query.array, in: VoidQuery())
+            return putAll(query.values, in: VoidQuery())
         default:
-            fatalError()
+            query.fatalError(.putAll, self)
         }
     }
     
@@ -135,24 +143,24 @@ public class RealmDataSource <E: Entity, O: Object> : DataSource {
             }
         case let query as ObjectQuery<E>:
             return realmHandler.write { realm in
-                if query.object.id == nil {
+                if query.value.id == nil {
                     throw CoreError.IllegalArgument("The object Id must be not nil")
                 }
-                let object = try toRealmMapper.map(query.object, inRealm: realm)
+                let object = try toRealmMapper.map(query.value, inRealm: realm)
                 realm.delete(object)
                 return Void()
             }
         default:
-            fatalError()
+            query.fatalError(.delete, self)
         }
     }
     
     @discardableResult
     public func deleteAll(_ query: Query) -> Future<Void> {
         switch query {
-        case let query as ArrayQuery<E>:
+        case let query as ObjectsQuery<E>:
             return realmHandler.write { realm in
-                try query.array
+                try query.values
                     .map { try toRealmMapper.map($0, inRealm: realm) }
                     .forEach { realm.delete($0) }
                 return Void()
@@ -168,7 +176,7 @@ public class RealmDataSource <E: Entity, O: Object> : DataSource {
                 return Void()
                 }
         default:
-            fatalError()
+            query.fatalError(.deleteAll, self)
         }
     }
 }

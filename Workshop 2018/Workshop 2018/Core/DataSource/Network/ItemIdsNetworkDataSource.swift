@@ -10,7 +10,9 @@ import Foundation
 import MJSwiftCore
 import Alamofire
 
-class AskStoriesQuery : Query { }
+class AskStoriesQuery : KeyQuery {
+    let key: String = "askstories"
+}
 
 class ItemIdsNetworkDataSource : GetDataSource {
     

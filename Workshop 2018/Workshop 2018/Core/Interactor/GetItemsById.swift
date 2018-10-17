@@ -21,7 +21,7 @@ extension Interactor {
             self.getItem = getItem
         }
         
-        // Serial execution method
+//        // Serial execution method
 //        func execute(with itemIds: [Int]) -> Future<[Item]> {
 //            return executor.submit { resolver in
 //                let items = try itemIds.map { try self.getItem.execute($0, in: DirectExecutor()).result.get() }
@@ -30,7 +30,7 @@ extension Interactor {
 //        }
         
         // Parallel execution method
-        func execute(with itemIds: [Int]) -> Future<[Item]> {
+        func execute(with itemIds: [Int], _ operation : MJSwiftCore.Operation = StorageSyncOperation()) -> Future<[Item]> {
             return executor.submit { resolver in
 
                 // Custom operation queue to parallelize requests
@@ -39,7 +39,7 @@ extension Interactor {
                 let operationQueueExecutor = OperationQueueExecutor(operationQueue)
 
                 // Note: we are assuming here the data sources used in getItem are thread safe!
-                let future = FutureBatch.array(itemIds.map { self.getItem.execute($0, in: operationQueueExecutor) })
+                let future = Future.batch(itemIds.map { self.getItem.execute($0, operation, in: operationQueueExecutor) })
                 resolver.set(future)
             }
         }
