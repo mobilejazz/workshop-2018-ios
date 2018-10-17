@@ -10,7 +10,7 @@ import Foundation
 import MJSwiftCore
 import Alamofire
 
-class AskStoriesQuery : Query, KeyQuery {
+class AskStoriesQuery : KeyQuery {
     let key: String = "askstories"
 }
 

@@ -18,11 +18,11 @@ class ItemAssembly: Assembly {
         
         // Network
         let itemNetworkDataSource = ItemNetworkDataSource(container.resolve(SessionManager.self)!)
-        let networkDataSource = DataSourceAssambler(get: itemNetworkDataSource, put: VoidPutDataSource(), delete: VoidDeleteDataSource())
+        let networkDataSource = DataSourceAssembler(get: itemNetworkDataSource, put: VoidPutDataSource(), delete: VoidDeleteDataSource())
         
         // Storage
-        let userDefaultsDataSource = UserDefaultsDataSource<Data>(UserDefaults.standard, prefix: "item")
-        let itemToDataMappedDataSource = DataSourceMapper(dataSource: userDefaultsDataSource, toToMapper: EncodableToDataMapper<ItemEntity>(), toFromMapper: DataToDecodableMapper<ItemEntity>())
+        let userDefaultsDataSource = DeviceStorageDataSource<Data>(UserDefaults.standard, prefix: "item")
+        let itemToDataMappedDataSource = DataSourceMapper(dataSource: userDefaultsDataSource, toInMapper: EncodableToDataMapper<ItemEntity>(), toOutMapper: DataToDecodableMapper<ItemEntity>())
         
         let vastra = VastraService([VastraReachabilityStrategy(Reachability()!),
                                     VastraTimestampStrategy()])
@@ -31,9 +31,10 @@ class ItemAssembly: Assembly {
         
         // Repository
         let repository = NetworkStorageRepository(network: networkDataSource, storage: validatedDataSource)
-        let mappedRepository = GetRepositoryMapper(repository: repository, toFromMapper: ItemEntityToItemMapper())
+        let mappedRepository = GetRepositoryMapper(repository: repository, toOutMapper: ItemEntityToItemMapper())
         
 
+        
         // Registering default interactors
         container.register(Interactor.GetByQuery<Item>.self) { _ in Interactor.GetByQuery(defaultExecutor, mappedRepository) }
         

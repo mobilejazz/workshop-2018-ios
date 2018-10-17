@@ -39,7 +39,7 @@ extension Interactor {
                 let operationQueueExecutor = OperationQueueExecutor(operationQueue)
 
                 // Note: we are assuming here the data sources used in getItem are thread safe!
-                let future = FutureBatch.array(itemIds.map { self.getItem.execute($0, operation, in: operationQueueExecutor) })
+                let future = Future.batch(itemIds.map { self.getItem.execute($0, operation, in: operationQueueExecutor) })
                 resolver.set(future)
             }
         }

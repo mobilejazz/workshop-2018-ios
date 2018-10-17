@@ -59,7 +59,7 @@ class ListViewController: UITableViewController {
     
     // MARK: - Data loading
 
-    func reloadData(refresh: Bool = false, completion: @escaping () -> Void = {}) {
+    func reloadData(refresh: Bool = false, _ completion: @escaping () -> Void = {}) {
         getAskstoriesIds.execute(refresh ? NetworkSyncOperation() : StorageSyncOperation()).flatMap { ids in
             return self.getItemsById.execute(with: ids)
             }.then { items in

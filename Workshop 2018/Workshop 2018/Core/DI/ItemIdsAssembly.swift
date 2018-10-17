@@ -17,10 +17,10 @@ class ItemIdsAssembly: Assembly {
         
         // Network
         let itemIdsNetworkDataSource = ItemIdsNetworkDataSource(container.resolve(SessionManager.self)!)
-        let networkDataSource = DataSourceAssambler(get: itemIdsNetworkDataSource, put: VoidPutDataSource(), delete: VoidDeleteDataSource())
+        let networkDataSource = DataSourceAssembler(get: itemIdsNetworkDataSource, put: VoidPutDataSource(), delete: VoidDeleteDataSource())
         
         // Storage
-        let userDefaultsDataSource = UserDefaultsDataSource<Int>(UserDefaults.standard, prefix: "itemIds")
+        let userDefaultsDataSource = DeviceStorageDataSource<Int>(UserDefaults.standard, prefix: "itemIds")
 
         // Repository
         let repository = NetworkStorageRepository(network: networkDataSource, storage: userDefaultsDataSource)

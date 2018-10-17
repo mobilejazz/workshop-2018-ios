@@ -16,27 +16,12 @@
 
 import Foundation
 
-/// Protocol to use a query as a key for a key value interface
-public protocol KeyQuery : Query {
-    /// The key associated to the query
-    var key : String { get }
-}
+///
+/// An operation defines an abstraction on how data must be fetched (to which DataSource<T> a query must be forwarded).
+///
+public protocol Operation { }
 
-extension IdQuery : KeyQuery {
-    public var key : String {
-        get {
-            switch T.self {
-            case is String.Type:
-                return id as! String
-            case is Int.Type:
-                return "\(id as! Int)"
-            default:
-                return "\(id.hashValue)"
-            }
-        }
-    }
-}
-
-extension AllObjectsQuery : KeyQuery {
-    public var key : String { get { return "allObjects" } }
+/// An empty operation definition
+public class VoidOperation : Operation {
+    public init() { }
 }
